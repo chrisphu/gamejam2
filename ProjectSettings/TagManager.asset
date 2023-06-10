@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - DefaultPlayerParent
+  - ScreenFade
+  - HurtSplash
   layers:
   - Default
   - TransparentFX
@@ -13,7 +15,7 @@ TagManager:
   - Water
   - UI
   - Enemy
-  - 
+  - Tilemap
   - 
   - 
   - 

@@ -30,8 +30,8 @@ public class MovingPlatformController : MonoBehaviour
             }
 
             float i = Mathf.Clamp01(_currentMoveTime / TimeToMove).EaseInOutQuad();
-            _rigidbody2d.MovePosition(Vector2.Lerp(Positions[startPositionNumber], Positions[_currentDesiredPositionNumber], i));
-            // transform.position = Vector2.Lerp(Positions[startPositionNumber], Positions[_currentDesiredPositionNumber], i);
+            // _rigidbody2d.MovePosition(Vector2.Lerp(Positions[startPositionNumber], Positions[_currentDesiredPositionNumber], i));
+            transform.position = Vector2.Lerp(Positions[startPositionNumber], Positions[_currentDesiredPositionNumber], i);
         }
     }
 
