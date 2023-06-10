@@ -40,7 +40,14 @@ public class PlayerController : MonoBehaviour
 
     private void UpdatePlayerGroundedState()
     {
-        RaycastHit2D groundRaycastHit = Physics2D.CapsuleCast(transform.position, _capsuleCollider2d.size * 0.99f, _capsuleCollider2d.direction, 0.0f, -Vector2.up, DistanceToGround, _ignoreEntitesMask);
+        RaycastHit2D groundRaycastHit = Physics2D.CapsuleCast(
+            transform.position,
+            new Vector2(_capsuleCollider2d.size.x * 0.75f, _capsuleCollider2d.size.y),
+            _capsuleCollider2d.direction,
+            0.0f,
+            -Vector2.up,
+            DistanceToGround,
+            _ignoreEntitesMask);
 
         if (groundRaycastHit.collider != null)
         {
