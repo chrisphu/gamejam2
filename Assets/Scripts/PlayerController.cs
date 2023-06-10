@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float MoveSpeed = 1.0f;
+    public float MaxMoveSpeed = 1.0f;
 
     private Rigidbody2D _rigidbody2d;
 
@@ -13,8 +14,18 @@ public class PlayerController : MonoBehaviour
         _rigidbody2d = transform.GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        _rigidbody2d.AddForce(Vector2.right * MoveSpeed, ForceMode2D.Force);
+        Vector2 playerInput = Vector2.right * Input.GetAxis("Horizontal") * MoveSpeed;
+        Vector2 newRigidBody2dVelocity = _rigidbody2d.velocity + playerInput * Time.fixedDeltaTime;
+
+        if (Mathf.Abs(newRigidBody2dVelocity.x) < MaxMoveSpeed)
+        {
+            _rigidbody2d.velocity = newRigidBody2dVelocity;
+        }
+        else if (Mathf.Abs(_rigidbody2d.velocity.x) < MaxMoveSpeed)
+        {
+            _rigidbody2d.velocity = new Vector2(Mathf.Sign(_rigidbody2d.velocity.x) * MaxMoveSpeed, _rigidbody2d.velocity.y);
+        }
     }
 }
