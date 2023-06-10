@@ -5,12 +5,12 @@ using UnityEngine.Events;
 
 public class HeartBeatController : MonoBehaviour
 {
-    public UnityEvent OnHeartDownBeat;
-    public UnityEvent OnHeartNormalBeat;
-
     public bool Beating = true;
     public float BeatsPerMinute = 60.0f;
     public int BeatsPerMeasure = 4;
+
+    public UnityEvent OnHeartDownBeat;
+    public UnityEvent OnHeartNormalBeat;
 
     private AudioSource _audioSource;
     private float _currentBeatTime = 0.0f;
