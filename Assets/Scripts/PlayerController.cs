@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public float MaxCoyoteTime = 1.0f;
     public float DistanceToGround = 1.0f;
 
+    private Transform _defaultPlayerParent;
     private Rigidbody2D _rigidbody2d;
     private CapsuleCollider2D _capsuleCollider2d;
 
@@ -17,10 +18,11 @@ public class PlayerController : MonoBehaviour
     private bool _doubleJumpAvailable = true;
     private float _coyoteTime = 0.0f;
 
-    private int _ignorePlayerMask = ~(1 << 3);
+    private int _ignoreEntitesMask = ~((1 << 3) | (1 << 6));
 
     private void Start()
     {
+        _defaultPlayerParent = GameObject.FindGameObjectWithTag("DefaultPlayerParent").transform;
         _rigidbody2d = transform.GetComponent<Rigidbody2D>();
         _capsuleCollider2d = transform.GetComponent<CapsuleCollider2D>();
     }
@@ -38,13 +40,15 @@ public class PlayerController : MonoBehaviour
 
     private void UpdatePlayerGroundedState()
     {
-        RaycastHit2D groundRaycastHit = Physics2D.CapsuleCast(transform.position, _capsuleCollider2d.size * 0.99f, _capsuleCollider2d.direction, 0.0f, -Vector2.up, DistanceToGround, _ignorePlayerMask);
+        RaycastHit2D groundRaycastHit = Physics2D.CapsuleCast(transform.position, _capsuleCollider2d.size * 0.99f, _capsuleCollider2d.direction, 0.0f, -Vector2.up, DistanceToGround, _ignoreEntitesMask);
 
         if (groundRaycastHit.collider != null)
         {
             _grounded = true;
             _doubleJumpAvailable = true;
             _coyoteTime = 0.0f;
+
+            transform.SetParent(groundRaycastHit.transform);
         }
         else
         {
@@ -55,6 +59,7 @@ public class PlayerController : MonoBehaviour
             else
             {
                 _grounded = false;
+                transform.SetParent(_defaultPlayerParent);
             }
         }
     }
@@ -73,6 +78,7 @@ public class PlayerController : MonoBehaviour
                 _grounded = false;
 
                 // _rigidbody2d.MovePosition((Vector2)transform.position + Vector2.up * DistanceToGround * 2.0f);
+                transform.SetParent(_defaultPlayerParent);
                 _rigidbody2d.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
             }
         }
