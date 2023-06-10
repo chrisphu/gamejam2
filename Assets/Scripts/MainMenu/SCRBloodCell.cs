@@ -6,6 +6,7 @@ public class SCRBloodCell : MonoBehaviour
 {
     public BloodSpawner blood_spawner;
     public GameObject game_area;
+    public GameObject death_area;
 
     public float speed;
 
@@ -17,7 +18,7 @@ public class SCRBloodCell : MonoBehaviour
     void Move()
     {
         transform.position += transform.up * (Time.deltaTime * speed);
-        float distance = Vector3.Distance(transform.position, game_area.transform.position);
+        float distance = Vector3.Distance(transform.position, death_area.transform.position);
 
         if (distance > blood_spawner.death_circle_radius)
         {
