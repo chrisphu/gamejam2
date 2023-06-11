@@ -7,9 +7,11 @@ public class PlayerDeathAndTransitionController : MonoBehaviour
 {
     [Header("Player death")]
     public float TimeDelayBeforeFadeOut = 2.0f;
-    public float TimeDelayBeforeMove = 2.0f;
+    public float TimeDelayBeforeSceneReload = 2.0f;
+    /*
     public float TimeDelayBeforeFadeIn = 0.1f;
     public float TimeDelayBeforePlayerCanMove = 2.0f;
+    */
 
     [Header("Scene transition")]
     public float TimeDelayBeforeSceneChange = 2.0f;
@@ -21,7 +23,7 @@ public class PlayerDeathAndTransitionController : MonoBehaviour
     private int _previousState = 0;
     private int _currentState = 0;
     private float _currentStateTime = 0.0f;
-    private Vector3 _positionForPlayerAfterRespawn = Vector3.zero;
+    // private Vector3 _positionForPlayerAfterRespawn = Vector3.zero;
     
     private string _sceneToTransitionTo = string.Empty;
 
@@ -39,15 +41,17 @@ public class PlayerDeathAndTransitionController : MonoBehaviour
             _previousState = _currentState;
             _currentStateTime = 0.0f;
 
-            // States 0 - 5 are for respawning
+            // States 0 - 3 are for respawning
             if (_currentState == 2)
             {
                 _screenFadeAnimator.SetTrigger("FadeOut");
             }
             else if (_currentState == 3)
             {
-                transform.position = _positionForPlayerAfterRespawn;
+                // transform.position = _positionForPlayerAfterRespawn;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
             }
+            /*
             else if (_currentState == 4)
             {
                 _screenFadeAnimator.SetTrigger("FadeIn");
@@ -58,6 +62,7 @@ public class PlayerDeathAndTransitionController : MonoBehaviour
                 _rigidbody2d.bodyType = RigidbodyType2D.Dynamic;
                 _playerDeathAndTransitionDebounce = false;
             }
+            */
 
             // States 10 - 12 is for scene transitioning
             else if (_currentState == 11)
@@ -75,10 +80,12 @@ public class PlayerDeathAndTransitionController : MonoBehaviour
 
             if (
                 (_currentState == 1 && _currentStateTime > TimeDelayBeforeFadeOut) ||
-                (_currentState == 2 && _currentStateTime > TimeDelayBeforeMove) ||
+                (_currentState == 2 && _currentStateTime > TimeDelayBeforeSceneReload))//  ||
+                /*
                 (_currentState == 3 && _currentStateTime > TimeDelayBeforeFadeIn) ||
                 (_currentState == 4 && _currentStateTime > TimeDelayBeforePlayerCanMove) ||
                 (_currentState == 11 && _currentStateTime > TimeDelayBeforeSceneChange))
+                */
             {
                 _currentState++;
             }
@@ -99,6 +106,7 @@ public class PlayerDeathAndTransitionController : MonoBehaviour
                 _previousState = 0;
                 _currentState = 1;
 
+                /*
                 GameObject playerSpawn = GameObject.Find("PlayerSpawn");
 
                 if (playerSpawn != null)
@@ -109,6 +117,7 @@ public class PlayerDeathAndTransitionController : MonoBehaviour
                 {
                     _positionForPlayerAfterRespawn = Vector3.zero;
                 }
+                */
 
                 GameObject hurtSplash = GameObject.FindGameObjectWithTag("HurtSplash");
 
