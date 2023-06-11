@@ -30,13 +30,6 @@ public class PlayerController : MonoBehaviour
         _capsuleCollider2d = transform.GetComponent<CapsuleCollider2D>();
     }
 
-    /*
-    private void Update()
-    {
-
-    }
-    */
-
     private void FixedUpdate()
     {
         if (!PlayerInputLocked)
