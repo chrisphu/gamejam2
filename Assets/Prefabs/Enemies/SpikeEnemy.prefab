@@ -177,7 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HopForwardForce: 10
   HopUpwardForce: 5
-  MaxDistanceThresholdForChasing: 100
+  MaxDistanceThresholdForChasing: 20
 --- !u!95 &4416121500677861863
 Animator:
   serializedVersion: 5
