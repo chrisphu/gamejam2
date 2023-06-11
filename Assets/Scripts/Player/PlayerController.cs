@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 
     public float MoveSpeed = 1.0f;
     public float MaxMoveSpeed = 1.0f;
+    public float DragSpeed = 1.0f;
     public float JumpForce = 1.0f;
     public float MaxCoyoteTime = 1.0f;
     public float DistanceToGround = 1.0f;
@@ -114,16 +115,33 @@ public class PlayerController : MonoBehaviour
 
     private void CheckHorizontalInput()
     {
-        Vector2 playerInput = Vector2.right * Input.GetAxis("Horizontal") * MoveSpeed;
-        Vector2 newRigidBody2dVelocity = _rigidbody2d.velocity + playerInput * Time.fixedDeltaTime;
+        if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0.0f)
+        {
+            Vector2 playerInput = Vector2.right * Input.GetAxis("Horizontal") * MoveSpeed;
+            Vector2 newRigidBody2dVelocity = _rigidbody2d.velocity + playerInput * Time.fixedDeltaTime;
 
-        if (Mathf.Abs(newRigidBody2dVelocity.x) < MaxMoveSpeed)
-        {
-            _rigidbody2d.velocity = newRigidBody2dVelocity;
+            if (Mathf.Abs(newRigidBody2dVelocity.x) < MaxMoveSpeed)
+            {
+                _rigidbody2d.velocity = newRigidBody2dVelocity;
+            }
+            else if (Mathf.Abs(_rigidbody2d.velocity.x) < MaxMoveSpeed)
+            {
+                _rigidbody2d.velocity = new Vector2(Mathf.Sign(_rigidbody2d.velocity.x) * MaxMoveSpeed, _rigidbody2d.velocity.y);
+            }
         }
-        else if (Mathf.Abs(_rigidbody2d.velocity.x) < MaxMoveSpeed)
+        else
         {
-            _rigidbody2d.velocity = new Vector2(Mathf.Sign(_rigidbody2d.velocity.x) * MaxMoveSpeed, _rigidbody2d.velocity.y);
+            Vector2 dragForce = Vector2.right * -Mathf.Sign(_rigidbody2d.velocity.x) * DragSpeed;
+            Vector2 newRigidBody2dVelocity = _rigidbody2d.velocity + dragForce * Time.fixedDeltaTime;
+
+            if (Mathf.Abs(_rigidbody2d.velocity.x) < (dragForce * Time.fixedDeltaTime).magnitude)
+            {
+                _rigidbody2d.velocity = new Vector2(0.0f, _rigidbody2d.velocity.y);
+            }
+            else
+            {
+                _rigidbody2d.velocity = newRigidBody2dVelocity;
+            }
         }
     }
 }

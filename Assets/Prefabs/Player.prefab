@@ -220,7 +220,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 2
+  m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 3
   m_Material: {fileID: 0}
@@ -247,9 +247,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerInputLocked: 0
-  MoveSpeed: 40
-  MaxMoveSpeed: 30
-  JumpForce: 20
+  MoveSpeed: 42
+  MaxMoveSpeed: 12
+  DragSpeed: 42
+  JumpForce: 15
   MaxCoyoteTime: 0.2
   DistanceToGround: 0.025
 --- !u!114 &6536260256685535120
