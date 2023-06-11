@@ -7,9 +7,12 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool isPaused;
     public GameObject PauseMenuUI;
+    private PlayerDeathAndTransitionController _playerDeathAndTransitionController;
     private void Start()
     {
         isPaused = false;
+        _playerDeathAndTransitionController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerDeathAndTransitionController>();
+
     }
     // Update is called once per frame
     void Update()
@@ -41,10 +44,12 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMenu()
     {
+        Resume();
         SceneManager.LoadScene("MainMenu");
     }
     public void Retry()
     {
-        Debug.Log("Loading menu...");
+        Resume();
+        _playerDeathAndTransitionController.StartFadeOutAndMove(false, true);
     }
 }
