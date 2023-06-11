@@ -22,8 +22,8 @@ public class PlayerController : MonoBehaviour
 
     private bool _jumpKeyDebounce = false;
 
-    private int _ignoreEntitesMask = ~((1 << 3) | (1 << 6));
-    private int _ignoreEntitesAndTilemapMask = ~((1 << 3) | (1 << 6) | (1 << 7));
+    private int _ignoreEntitesAndConfinerMask = ~((1 << 3) | (1 << 6) | (1 << 8));
+    private int _ignoreEntitesAndAndConfinerAndTilemapMask = ~((1 << 3) | (1 << 6) | (1 << 7) | (1 << 8));
 
     private void Start()
     {
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
             0.0f,
             -Vector2.up,
             DistanceToGround,
-            _ignoreEntitesMask);
+            _ignoreEntitesAndConfinerMask);
 
         RaycastHit2D groundRaycastHitIgnoringTilemap = Physics2D.CapsuleCast(
             transform.position,
@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
             0.0f,
             -Vector2.up,
             DistanceToGround,
-            _ignoreEntitesAndTilemapMask);
+            _ignoreEntitesAndAndConfinerAndTilemapMask);
 
         if (groundRaycastHit.collider != null)
         {
