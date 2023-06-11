@@ -35,7 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2320586742900853407
 SpriteRenderer:
@@ -175,8 +175,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87b3965b2af624946866227ae826874a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HopForwardForce: 10
-  HopUpwardForce: 5
+  HopForwardForce: 12
+  HopUpwardForce: 7
   MaxDistanceThresholdForChasing: 20
 --- !u!95 &4416121500677861863
 Animator:
