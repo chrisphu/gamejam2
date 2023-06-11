@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D _rigidbody2d;
     private CapsuleCollider2D _capsuleCollider2d;
+    Animator _animator;
 
     private bool _grounded = true;
     private bool _doubleJumpAvailable = true;
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour
     {
         _rigidbody2d = transform.GetComponent<Rigidbody2D>();
         _capsuleCollider2d = transform.GetComponent<CapsuleCollider2D>();
+        _animator = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -84,6 +86,8 @@ public class PlayerController : MonoBehaviour
                 transform.SetParent(null);
             }
         }
+
+        _animator.SetBool("Grounded", _grounded);
     }
 
     private void CheckJumpInput()
