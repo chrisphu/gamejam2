@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 4113831170012101995}
   - component: {fileID: 2723867066713315982}
   - component: {fileID: 6536260256685535120}
+  - component: {fileID: 8533259358647038183}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -159,7 +160,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
   m_Color: {r: 0.7924528, g: 0.17568529, b: 0.17568529, a: 1}
   m_FlipX: 0
@@ -263,7 +264,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dcd63b40ecd3bb4c901d23ab9f793fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeDelayBeforeFadeOut: 2
-  TimeDelayBeforeMove: 1.25
-  TimeDelayBeforeFadeIn: 0.1
-  TimeDelayBeforePlayerCanMove: 1.25
+  TimeDelayBeforeFadeOut: 1
+  TimeDelayBeforeMove: 1
+  TimeDelayBeforeFadeIn: 1
+  TimeDelayBeforePlayerCanMove: 1
+--- !u!114 &8533259358647038183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9199658572904273797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4072afc97c485b45a27d3b7eb8aa062, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxSpeakingDistance: 7.5

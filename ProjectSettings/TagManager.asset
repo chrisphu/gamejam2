@@ -7,6 +7,9 @@ TagManager:
   - DefaultPlayerParent
   - ScreenFade
   - HurtSplash
+  - Speakers
+  - ChatBox
+  - SpeechBalloon
   layers:
   - Default
   - TransparentFX
