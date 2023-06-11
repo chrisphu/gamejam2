@@ -13,7 +13,7 @@ public class HeartBeatController : MonoBehaviour
     public UnityEvent OnHeartNormalBeat;
 
     private AudioSource _audioSource;
-    private float _currentBeatTime = 0.0f;
+    private float _currentBeatTime = 1000000.0f;
     private int _currentBeat = 0;
 
     void Start()
@@ -24,27 +24,31 @@ public class HeartBeatController : MonoBehaviour
 
     void Update()
     {
-        if (Beating)
+        if (!Beating)
         {
-            _currentBeatTime += Time.deltaTime;
-
-            if (_currentBeatTime >= 1.0f / (BeatsPerMinute / 60.0f))
-            {
-                _currentBeatTime = 0.0f;
-                _currentBeat = (_currentBeat + 1) % BeatsPerMeasure;
-
-                if (_currentBeat == 0)
-                {
-                    OnHeartDownBeat.Invoke();
-                }
-                else
-                {
-                    OnHeartNormalBeat.Invoke();
-                }
-
-                _audioSource.Play();
-            }
+            return;
         }
+
+        _currentBeatTime += Time.deltaTime;
+
+        if (_currentBeatTime < 1.0f / (BeatsPerMinute / 60.0f))
+        {
+            return;
+        }
+
+        _currentBeatTime = 0.0f;
+        _currentBeat = (_currentBeat + 1) % BeatsPerMeasure;
+
+        if (_currentBeat == 0)
+        {
+            OnHeartDownBeat.Invoke();
+        }
+        else
+        {
+            OnHeartNormalBeat.Invoke();
+        }
+
+        _audioSource.Play();
     }
 
     public void ResetBeat()
