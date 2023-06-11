@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class HoppingEnemyController : MonoBehaviour
 {
+    [Header("Listening")]
+    public bool AutoAddSelfToDownBeat = true;
+
+    [Header("Behavior")]
     public float HopForwardForce = 1.0f;
     public float HopUpwardForce = 1.0f;
     public float MaxDistanceThresholdForChasing = 1.0f;
@@ -15,6 +19,12 @@ public class HoppingEnemyController : MonoBehaviour
     {
         _rigidbody2d = transform.GetComponent<Rigidbody2D>();
         _spriteRenderer = transform.GetComponent<SpriteRenderer>();
+
+        if (AutoAddSelfToDownBeat)
+        {
+            HeartBeatController heartBeatController = GameObject.FindGameObjectWithTag("HeartBeat").GetComponent<HeartBeatController>();
+            heartBeatController.OnHeartDownBeat.AddListener(HopAtPlayer);
+        }
     }
 
     public void HopAtPlayer()

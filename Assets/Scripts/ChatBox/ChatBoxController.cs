@@ -9,7 +9,7 @@ public class ChatBoxController : MonoBehaviour
     public string SpeakerName = string.Empty;
     public Color SpeakerNameColor = Color.white;
     [TextAreaAttribute(6, 6)] public string DialogueText = string.Empty;
-    public float TimeBetweenLetters = 0.1f;
+    public float TimeBetweenLetters = 0.05f;
 
     public bool Speaking { get; private set; } = false;
 
@@ -41,7 +41,6 @@ public class ChatBoxController : MonoBehaviour
         }
 
         _dialogueTextTextMeshPro.text += DialogueText[_currentLetter];
-
         _currentTimeBetweenLetters = 0.0f;
         _currentLetter++;
 
