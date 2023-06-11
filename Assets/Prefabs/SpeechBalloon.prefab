@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2786768187803907696}
   - component: {fileID: 1156535585607572739}
   - component: {fileID: 4761203513156113207}
+  - component: {fileID: 795513115892187475}
   m_Layer: 0
   m_Name: SpeechBalloon
   m_TagString: SpeechBalloon
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 851870417247587623}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 5, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -98,9 +99,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttachTo: {fileID: 0}
-  SpeechBalloonSprites:
-  - {fileID: 21300000, guid: fe651d205ca46a04d873bde1f52163a7, type: 3}
-  - {fileID: 21300000, guid: 779129381f5f08549bb4982b0c4c4649, type: 3}
-  - {fileID: 21300000, guid: ba1d9f455736a8242b16d710eee78be2, type: 3}
-  - {fileID: 21300000, guid: 4b99fee887f7d704db6be09b4c789632, type: 3}
-  TimeBetweenFrames: 0.35
+--- !u!95 &795513115892187475
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 851870417247587623}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0764903a1ed076b4d900802699dc62e2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
