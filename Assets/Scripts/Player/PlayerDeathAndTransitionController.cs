@@ -8,10 +8,6 @@ public class PlayerDeathAndTransitionController : MonoBehaviour
     [Header("Player death")]
     public float TimeDelayBeforeFadeOut = 2.0f;
     public float TimeDelayBeforeSceneReload = 2.0f;
-    /*
-    public float TimeDelayBeforeFadeIn = 0.1f;
-    public float TimeDelayBeforePlayerCanMove = 2.0f;
-    */
 
     [Header("Scene transition")]
     public float TimeDelayBeforeSceneChange = 2.0f;
@@ -23,7 +19,6 @@ public class PlayerDeathAndTransitionController : MonoBehaviour
     private int _previousState = 0;
     private int _currentState = 0;
     private float _currentStateTime = 0.0f;
-    // private Vector3 _positionForPlayerAfterRespawn = Vector3.zero;
     
     private string _sceneToTransitionTo = string.Empty;
 
@@ -51,18 +46,6 @@ public class PlayerDeathAndTransitionController : MonoBehaviour
                 // transform.position = _positionForPlayerAfterRespawn;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
             }
-            /*
-            else if (_currentState == 4)
-            {
-                _screenFadeAnimator.SetTrigger("FadeIn");
-            }
-            else if (_currentState == 5)
-            {
-                _playerController.PlayerInputLocked = false;
-                _rigidbody2d.bodyType = RigidbodyType2D.Dynamic;
-                _playerDeathAndTransitionDebounce = false;
-            }
-            */
 
             // States 10 - 12 is for scene transitioning
             else if (_currentState == 11)
@@ -80,19 +63,14 @@ public class PlayerDeathAndTransitionController : MonoBehaviour
 
             if (
                 (_currentState == 1 && _currentStateTime > TimeDelayBeforeFadeOut) ||
-                (_currentState == 2 && _currentStateTime > TimeDelayBeforeSceneReload))//  ||
-                /*
-                (_currentState == 3 && _currentStateTime > TimeDelayBeforeFadeIn) ||
-                (_currentState == 4 && _currentStateTime > TimeDelayBeforePlayerCanMove) ||
-                (_currentState == 11 && _currentStateTime > TimeDelayBeforeSceneChange))
-                */
+                (_currentState == 2 && _currentStateTime > TimeDelayBeforeSceneReload))
             {
                 _currentState++;
             }
         }
     }
 
-    public void StartFadeOutAndMove(bool playerDied = true, string sceneToTransitionTo = "")
+    public void StartFadeOutAndMove(bool playerDied = true, bool sceneReload = true, string sceneToTransitionTo = "")
     {
         if (!_playerDeathAndTransitionDebounce)
         {
@@ -103,28 +81,18 @@ public class PlayerDeathAndTransitionController : MonoBehaviour
 
             if (playerDied)
             {
-                _previousState = 0;
-                _currentState = 1;
-
-                /*
-                GameObject playerSpawn = GameObject.Find("PlayerSpawn");
-
-                if (playerSpawn != null)
-                {
-                    _positionForPlayerAfterRespawn = playerSpawn.transform.position;
-                }
-                else
-                {
-                    _positionForPlayerAfterRespawn = Vector3.zero;
-                }
-                */
-
                 GameObject hurtSplash = GameObject.FindGameObjectWithTag("HurtSplash");
 
                 if (hurtSplash != null)
                 {
                     hurtSplash.GetComponent<Animator>().SetTrigger("Hit");
                 }
+            }
+
+            if (sceneReload)
+            {
+                _previousState = 0;
+                _currentState = 1;
             }
             else
             {
