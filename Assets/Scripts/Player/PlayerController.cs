@@ -36,8 +36,8 @@ public class PlayerController : MonoBehaviour
         if (!PlayerInputLocked)
         {
             UpdatePlayerGroundedState();
-            CheckJumpInput();
             CheckHorizontalInput();
+            CheckJumpInput();
         }
     }
 
@@ -104,6 +104,7 @@ public class PlayerController : MonoBehaviour
 
                 // _rigidbody2d.MovePosition((Vector2)transform.position + Vector2.up * DistanceToGround * 2.0f);
                 transform.SetParent(null);
+                _rigidbody2d.velocity = new Vector2(_rigidbody2d.velocity.x, 0.0f);
                 _rigidbody2d.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
             }
         }
