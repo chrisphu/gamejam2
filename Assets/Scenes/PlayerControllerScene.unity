@@ -1825,6 +1825,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sign
       objectReference: {fileID: 0}
+    - target: {fileID: 8502513493155801077, guid: 540777f2860ed334b9f15fb0ec55f221, type: 3}
+      propertyPath: DialogueTextLines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8502513493155801077, guid: 540777f2860ed334b9f15fb0ec55f221, type: 3}
+      propertyPath: DialogueTextLines.Array.data[1]
+      value: Hello there, traveler! Go *that* way.
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
