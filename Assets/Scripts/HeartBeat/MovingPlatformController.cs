@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class MovingPlatformController : MonoBehaviour
 {
+    [Header("Listening")]
+    public bool AutoAddSelfToDownBeat = true;
+
+    [Header("Behavior")]
     public Vector2[] Positions = new Vector2[2];
     public float TimeToMove = 1.0f;
 
@@ -15,6 +19,12 @@ public class MovingPlatformController : MonoBehaviour
     {
         _rigidbody2d = transform.GetComponent<Rigidbody2D>();
         _currentMoveTime = TimeToMove;
+
+        if (AutoAddSelfToDownBeat)
+        {
+            HeartBeatController heartBeatController = GameObject.FindGameObjectWithTag("HeartBeat").GetComponent<HeartBeatController>();
+            heartBeatController.OnHeartDownBeat.AddListener(Move);
+        }
     }
 
     private void FixedUpdate()

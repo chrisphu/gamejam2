@@ -35,12 +35,9 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!PlayerInputLocked)
-        {
-            UpdatePlayerGroundedState();
-            CheckHorizontalInput();
-            CheckJumpInput();
-        }
+        UpdatePlayerGroundedState();
+        CheckHorizontalInput();
+        CheckJumpInput();
     }
 
     private void UpdatePlayerGroundedState()
@@ -96,7 +93,7 @@ public class PlayerController : MonoBehaviour
         {
             _jumpKeyDebounce = true;
 
-            if (_grounded || _doubleJumpAvailable)
+            if (!PlayerInputLocked && (_grounded || _doubleJumpAvailable))
             {
                 if (!_grounded)
                 {
@@ -105,8 +102,6 @@ public class PlayerController : MonoBehaviour
                 }
 
                 _grounded = false;
-
-                // _rigidbody2d.MovePosition((Vector2)transform.position + Vector2.up * DistanceToGround * 2.0f);
                 transform.SetParent(null);
                 _rigidbody2d.velocity = new Vector2(_rigidbody2d.velocity.x, 0.0f);
                 _rigidbody2d.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
@@ -120,7 +115,7 @@ public class PlayerController : MonoBehaviour
 
     private void CheckHorizontalInput()
     {
-        if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0.0f)
+        if (!PlayerInputLocked && Mathf.Abs(Input.GetAxis("Horizontal")) > 0.0f)
         {
             Vector2 playerInput = Vector2.right * Input.GetAxis("Horizontal") * MoveSpeed;
             Vector2 newRigidBody2dVelocity = _rigidbody2d.velocity + playerInput * Time.fixedDeltaTime;

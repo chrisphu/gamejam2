@@ -91,13 +91,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9173612050817131169}
-  - component: {fileID: 2773854213168550859}
-  - component: {fileID: 7150505906660333966}
-  - component: {fileID: 4113831170012101995}
   - component: {fileID: 2723867066713315982}
   - component: {fileID: 6536260256685535120}
   - component: {fileID: 8533259358647038183}
   - component: {fileID: 6944331427434827763}
+  - component: {fileID: 2773854213168550859}
+  - component: {fileID: 7150505906660333966}
+  - component: {fileID: 4113831170012101995}
   - component: {fileID: 1938812723536970488}
   m_Layer: 3
   m_Name: Player
@@ -122,6 +122,65 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2723867066713315982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9199658572904273797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 121a18af7c72d584ea6452624acf0963, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerInputLocked: 0
+  MoveSpeed: 42
+  MaxMoveSpeed: 12
+  DragSpeed: 42
+  JumpForce: 15
+  MaxCoyoteTime: 0.2
+  DistanceToGround: 0.025
+--- !u!114 &6536260256685535120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9199658572904273797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dcd63b40ecd3bb4c901d23ab9f793fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TimeDelayBeforeFadeOut: 1
+  TimeDelayBeforeSceneReload: 2
+  TimeDelayBeforeSceneChange: 1
+--- !u!114 &8533259358647038183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9199658572904273797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4072afc97c485b45a27d3b7eb8aa062, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxSpeakingDistance: 7.5
+--- !u!114 &6944331427434827763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9199658572904273797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87888840fe5b88240bf22a744e017da1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &2773854213168550859
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -236,67 +295,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &2723867066713315982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9199658572904273797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 121a18af7c72d584ea6452624acf0963, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerInputLocked: 0
-  MoveSpeed: 42
-  MaxMoveSpeed: 12
-  DragSpeed: 42
-  JumpForce: 15
-  MaxCoyoteTime: 0.2
-  DistanceToGround: 0.025
---- !u!114 &6536260256685535120
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9199658572904273797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dcd63b40ecd3bb4c901d23ab9f793fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TimeDelayBeforeFadeOut: 1
-  TimeDelayBeforeMove: 1
-  TimeDelayBeforeFadeIn: 1
-  TimeDelayBeforePlayerCanMove: 1
-  TimeDelayBeforeSceneChange: 1
---- !u!114 &8533259358647038183
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9199658572904273797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4072afc97c485b45a27d3b7eb8aa062, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxSpeakingDistance: 7.5
---- !u!114 &6944331427434827763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9199658572904273797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87888840fe5b88240bf22a744e017da1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &1938812723536970488
 Animator:
   serializedVersion: 5
