@@ -27,8 +27,15 @@ public class HeartbeatModifier : MonoBehaviour
         _heartbeat.BeatsPerMinute = 200.0f;
     }
 
-    private void OnCollision2D(Collision2D collision2d)
+    private void OnCollisionEnter2D(Collision2D collision2d)
     {
+        PlayerController playerController = collision2d.collider.GetComponent<PlayerController>();
+
+        if (playerController == null)
+        {
+            return;
+        }
+
         ModifyHeartbeat();
     }
 }
