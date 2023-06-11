@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/TemplateScene.unity
+    path: Assets/Scenes/Archive/ObsoleteTemplateScene.unity
     guid: 7f9af7bc13d040d4883315562a1b446b
   - enabled: 1
-    path: Assets/Scenes/ExampleTransitionToScene.unity
+    path: Assets/Scenes/Archive/ExampleTransitionToScene.unity
     guid: ac108244142528a4185ce580d3ce00ba
   - enabled: 1
-    path: Assets/Scenes/HitarthTileScene.unity
+    path: Assets/Scenes/Level01.unity
     guid: d30f784f8af66f64a80f19c210bc2edb
   m_configObjects: {}
