@@ -15,11 +15,11 @@ public class HurtPlayer : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision2d)
     {
-        PlayerDeathAndTransitionController playerDeathController = collision2d.collider.GetComponent<PlayerDeathAndTransitionController>();
+        PlayerDeathAndTransitionController playerDeathAndTransitionController = collision2d.collider.GetComponent<PlayerDeathAndTransitionController>();
 
-        if (playerDeathController != null)
+        if (playerDeathAndTransitionController != null)
         {
-            playerDeathController.StartFadeOutAndMove();
+            playerDeathAndTransitionController.StartFadeOutAndMove();
         }
     }
 }
