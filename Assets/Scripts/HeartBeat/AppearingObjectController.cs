@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class AppearingObjectController : MonoBehaviour
 {
+    [Header("Listening")]
+    public bool AutoAddSelfToDownBeat = true;
+
+    [Header("Behavior")]
     [SerializeField] private bool _appearing = true;
     [Range(0.0f, 255.0f)] public float DisappearedAlpha = 0.0f;
 
@@ -16,6 +20,12 @@ public class AppearingObjectController : MonoBehaviour
         _spriteRenderer = transform.GetComponent<SpriteRenderer>();
 
         UpdateAppearance();
+
+        if (AutoAddSelfToDownBeat)
+        {
+            HeartBeatController heartBeatController = GameObject.FindGameObjectWithTag("HeartBeat").GetComponent<HeartBeatController>();
+            heartBeatController.OnHeartDownBeat.AddListener(ToggleAppearance);
+        }
     }
 
     public void ToggleAppearance()
