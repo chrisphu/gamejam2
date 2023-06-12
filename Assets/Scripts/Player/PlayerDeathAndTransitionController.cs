@@ -12,10 +12,15 @@ public class PlayerDeathAndTransitionController : MonoBehaviour
     [Header("Scene transition")]
     public float TimeDelayBeforeSceneChange = 2.0f;
 
+    [Header("Audio")]
+    public AudioClip DeathSound;
+
+    public bool PlayerDeathAndTransitionDebounce { get; private set; } = false;
+
     private Animator _screenFadeAnimator;
     private PlayerController _playerController;
     private Rigidbody2D _rigidbody2d;
-    private bool _playerDeathAndTransitionDebounce = false;
+    private AudioSource _audioSource;
     private int _previousState = 0;
     private int _currentState = 0;
     private float _currentStateTime = 0.0f;
@@ -27,6 +32,7 @@ public class PlayerDeathAndTransitionController : MonoBehaviour
         _screenFadeAnimator = GameObject.FindGameObjectWithTag("ScreenFade").GetComponent<Animator>();
         _playerController = transform.GetComponent<PlayerController>();
         _rigidbody2d = transform.GetComponent<Rigidbody2D>();
+        _audioSource = transform.GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -39,27 +45,31 @@ public class PlayerDeathAndTransitionController : MonoBehaviour
             // States 0 - 3 are for respawning
             if (_currentState == 2)
             {
+                _screenFadeAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
                 _screenFadeAnimator.SetTrigger("FadeOut");
             }
             else if (_currentState == 3)
             {
                 // transform.position = _positionForPlayerAfterRespawn;
+                Time.timeScale = 1.0f;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
             }
 
             // States 10 - 12 is for scene transitioning
             else if (_currentState == 11)
             {
+                _screenFadeAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
                 _screenFadeAnimator.SetTrigger("FadeOut");
             }
             else if (_currentState == 12)
             {
+                Time.timeScale = 1.0f;
                 SceneManager.LoadScene(_sceneToTransitionTo, LoadSceneMode.Single);
             }
         }
         else
         {
-            _currentStateTime += Time.deltaTime;
+            _currentStateTime += Time.unscaledDeltaTime;
 
             if (
                 (_currentState == 1 && _currentStateTime > TimeDelayBeforeFadeOut) ||
@@ -72,12 +82,13 @@ public class PlayerDeathAndTransitionController : MonoBehaviour
 
     public void StartFadeOutAndMove(bool playerDied = true, bool sceneReload = true, string sceneToTransitionTo = "")
     {
-        if (!_playerDeathAndTransitionDebounce)
+        if (!PlayerDeathAndTransitionDebounce)
         {
-            _playerDeathAndTransitionDebounce = true;
+            PlayerDeathAndTransitionDebounce = true;
             _playerController.PlayerInputLocked = true;
             _rigidbody2d.velocity = Vector3.zero;
             _rigidbody2d.bodyType = RigidbodyType2D.Kinematic;
+            Time.timeScale = 0.0f;
 
             if (playerDied)
             {
@@ -86,6 +97,11 @@ public class PlayerDeathAndTransitionController : MonoBehaviour
                 if (hurtSplash != null)
                 {
                     hurtSplash.GetComponent<Animator>().SetTrigger("Hit");
+                }
+
+                if (DeathSound != null)
+                {
+                    _audioSource.PlayOneShot(DeathSound);
                 }
             }
 
