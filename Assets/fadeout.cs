@@ -4,16 +4,26 @@ using UnityEngine;
 
 public class fadeout : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private bool _triggerDebounce = false;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
+        PlayerController playerController = collider.GetComponent<PlayerController>();
+
+        if (playerController == null)
+        {
+            return;
+        }
+
+        if (_triggerDebounce)
+        {
+            return;
+        }
+
+        _triggerDebounce = true;
         StartCoroutine(FadeAlpha(GetComponent<SpriteRenderer>(), 2f));
     }
+
     IEnumerator FadeAlpha(SpriteRenderer renderer, float duration)
     {
         Color startColor = renderer.color;
