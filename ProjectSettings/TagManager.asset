@@ -12,6 +12,7 @@ TagManager:
   - SpeechBalloon
   - HeartBeat
   - CheckpointInfo
+  - CheckpointFlag
   layers:
   - Default
   - TransparentFX
