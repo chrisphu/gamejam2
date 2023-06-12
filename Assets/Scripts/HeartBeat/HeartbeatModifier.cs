@@ -8,8 +8,7 @@ public class HeartbeatModifier : MonoBehaviour
 {
     public int BeatDuration = 4; //How many beats to stay at new modified time?
     public float SpeedChangePercent = 0.0f; //What percentage to change the new BPM to?
-    public float VignetteChange = 0.0f; //unused
-    public float ZoomChangePercent = 0.0f; //camera zoom change
+    public float ZoomChangePercent = 100.0f; //camera zoom change
 
     private HeartBeatController _heartbeat;
     private CinemachineVirtualCamera _camera;
@@ -63,7 +62,7 @@ public class HeartbeatModifier : MonoBehaviour
     private void ModifyHeartbeat()
     {
         _newBPM = _bpm * SpeedChangePercent;
-        _setterCoroutine = SetHeartBeat(_newBPM, 1.15f, SpeedChangePercent, 0);
+        _setterCoroutine = SetHeartBeat(_newBPM, ZoomChangePercent, SpeedChangePercent, 0);
         StartCoroutine(_setterCoroutine);
         float delay = 60 * BeatDuration / (_bpm * SpeedChangePercent);
 
