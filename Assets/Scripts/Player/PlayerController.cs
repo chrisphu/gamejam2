@@ -52,28 +52,41 @@ public class PlayerController : MonoBehaviour
 
     private void FindCheckpoint()
     {
-        GameObject checkpointInfoGameObject = GameObject.FindGameObjectWithTag("CheckpointInfo");
+        GameObject[] checkpointInfoGameObjects = GameObject.FindGameObjectsWithTag("CheckpointInfo");
 
-        if (checkpointInfoGameObject == null)
+        if (checkpointInfoGameObjects.Length == 0)
         {
             return;
         }
 
-        CheckpointInfo checkpointInfo = checkpointInfoGameObject.GetComponent<CheckpointInfo>();
-
-        if (checkpointInfo.CheckpointName == string.Empty)
+        foreach (GameObject checkpointInfoGameObject in checkpointInfoGameObjects)
         {
-            return;
+            CheckpointInfo checkpointInfo = checkpointInfoGameObject.GetComponent<CheckpointInfo>();
+
+            if (checkpointInfo == null)
+            {
+                continue;
+            }
+
+            if (checkpointInfo.CheckpointName == string.Empty)
+            {
+                continue;
+            }
+
+            GameObject foundCheckpointFlag = GameObject.FindGameObjectWithTag("CheckpointFlag");
+
+            if (foundCheckpointFlag == null)
+            {
+                continue;
+            }
+
+            if (foundCheckpointFlag.name != checkpointInfo.CheckpointName)
+            {
+                continue;
+            }
+
+            transform.position = foundCheckpointFlag.transform.position + Vector3.up * 1.0f;
         }
-
-        GameObject foundCheckpointFlag = GameObject.Find(checkpointInfo.CheckpointName);
-
-        if (foundCheckpointFlag == null)
-        {
-            return;
-        }
-
-        transform.position = foundCheckpointFlag.transform.position + Vector3.up * 2.0f;
     }
 
     private void UpdatePlayerGroundedState()
