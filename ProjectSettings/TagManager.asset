@@ -3,17 +3,26 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - DefaultPlayerParent
+  - ScreenFade
+  - HurtSplash
+  - Speakers
+  - ChatBox
+  - SpeechBalloon
+  - HeartBeat
+  - CheckpointInfo
+  - CheckpointFlag
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Enemy
+  - Tilemap
+  - RaycastAlwaysIgnore
   - 
   - 
   - 
