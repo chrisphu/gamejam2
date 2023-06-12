@@ -23,6 +23,7 @@ public class TransitionGatewayController : MonoBehaviour
 
         if (Application.CanStreamedLevelBeLoaded(SceneToTransitionTo))
         {
+            Debug.Log("Found!");
             playerDeathController.StartFadeOutAndMove(false, false, SceneToTransitionTo);
         }
         else

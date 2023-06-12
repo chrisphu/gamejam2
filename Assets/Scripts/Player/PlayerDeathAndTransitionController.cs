@@ -73,7 +73,8 @@ public class PlayerDeathAndTransitionController : MonoBehaviour
 
             if (
                 (_currentState == 1 && _currentStateTime > TimeDelayBeforeFadeOut) ||
-                (_currentState == 2 && _currentStateTime > TimeDelayBeforeSceneReload))
+                (_currentState == 2 && _currentStateTime > TimeDelayBeforeSceneReload) ||
+                (_currentState == 11 && _currentStateTime > TimeDelayBeforeSceneChange))
             {
                 _currentState++;
             }
@@ -115,6 +116,7 @@ public class PlayerDeathAndTransitionController : MonoBehaviour
                 _previousState = 10;
                 _currentState = 11;
                 _sceneToTransitionTo = sceneToTransitionTo;
+                Debug.Log("Starting transition to scene " + _sceneToTransitionTo);
             }
         }
     }
