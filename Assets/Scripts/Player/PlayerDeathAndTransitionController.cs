@@ -12,11 +12,15 @@ public class PlayerDeathAndTransitionController : MonoBehaviour
     [Header("Scene transition")]
     public float TimeDelayBeforeSceneChange = 2.0f;
 
+    [Header("Audio")]
+    public AudioClip DeathSound;
+
     public bool PlayerDeathAndTransitionDebounce { get; private set; } = false;
 
     private Animator _screenFadeAnimator;
     private PlayerController _playerController;
     private Rigidbody2D _rigidbody2d;
+    private AudioSource _audioSource;
     private int _previousState = 0;
     private int _currentState = 0;
     private float _currentStateTime = 0.0f;
@@ -28,6 +32,7 @@ public class PlayerDeathAndTransitionController : MonoBehaviour
         _screenFadeAnimator = GameObject.FindGameObjectWithTag("ScreenFade").GetComponent<Animator>();
         _playerController = transform.GetComponent<PlayerController>();
         _rigidbody2d = transform.GetComponent<Rigidbody2D>();
+        _audioSource = transform.GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -92,6 +97,11 @@ public class PlayerDeathAndTransitionController : MonoBehaviour
                 if (hurtSplash != null)
                 {
                     hurtSplash.GetComponent<Animator>().SetTrigger("Hit");
+                }
+
+                if (DeathSound != null)
+                {
+                    _audioSource.PlayOneShot(DeathSound);
                 }
             }
 

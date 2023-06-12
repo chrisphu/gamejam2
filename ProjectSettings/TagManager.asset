@@ -11,6 +11,7 @@ TagManager:
   - ChatBox
   - SpeechBalloon
   - HeartBeat
+  - CheckpointInfo
   layers:
   - Default
   - TransparentFX

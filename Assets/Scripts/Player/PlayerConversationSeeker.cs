@@ -6,16 +6,21 @@ public class PlayerConversationSeeker : MonoBehaviour
 {
     public float MaxSpeakingDistance = 1.0f;
 
+    [Header("Audio")]
+    public AudioClip InteractSound;
+
     private ChatBoxController _chatBoxController;
     private SpeechBalloonController _speechBalloonController;
     private bool _interactKeyDebounce = false;
     private SpeakerInfo _currentSpeaker = null;
     private int _currentSpeakerDialogueTextLine = 0;
+    private AudioSource _audioSource;
 
     private void Start()
     {
         _chatBoxController = GameObject.FindGameObjectWithTag("ChatBox").GetComponent<ChatBoxController>();
         _speechBalloonController = GameObject.FindGameObjectWithTag("SpeechBalloon").GetComponent<SpeechBalloonController>();
+        _audioSource = transform.GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -50,6 +55,11 @@ public class PlayerConversationSeeker : MonoBehaviour
                 _chatBoxController.DialogueText = _currentSpeaker.DialogueTextLines[0];
                 _currentSpeakerDialogueTextLine = 0;
                 _chatBoxController.RunDialogue();
+
+                if (InteractSound != null)
+                {
+                    _audioSource.PlayOneShot(InteractSound);
+                }
             }
             else
             {
@@ -67,6 +77,11 @@ public class PlayerConversationSeeker : MonoBehaviour
                 {
                     _currentSpeaker = null;
                     _chatBoxController.ClearDialogue();
+                }
+
+                if (InteractSound != null)
+                {
+                    _audioSource.PlayOneShot(InteractSound);
                 }
             }
         }

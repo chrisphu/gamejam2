@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Timeline;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Player input")]
     public bool PlayerInputLocked = false;
 
+    [Header("Movement")]
     public float MoveSpeed = 1.0f;
     public float MaxMoveSpeed = 1.0f;
     public float DragSpeed = 1.0f;
@@ -13,9 +16,13 @@ public class PlayerController : MonoBehaviour
     public float MaxCoyoteTime = 1.0f;
     public float DistanceToGround = 1.0f;
 
+    [Header("Audio")]
+    public AudioClip JumpSound;
+
     private Rigidbody2D _rigidbody2d;
     private CapsuleCollider2D _capsuleCollider2d;
-    Animator _animator;
+    private Animator _animator;
+    private AudioSource _audioSource;
 
     private bool _grounded = true;
     private bool _doubleJumpAvailable = true;
@@ -30,7 +37,10 @@ public class PlayerController : MonoBehaviour
     {
         _rigidbody2d = transform.GetComponent<Rigidbody2D>();
         _capsuleCollider2d = transform.GetComponent<CapsuleCollider2D>();
-        _animator = GetComponent<Animator>();
+        _animator = transform.GetComponent<Animator>();
+        _audioSource = transform.GetComponent<AudioSource>();
+
+        FindCheckpoint();
     }
 
     private void FixedUpdate()
@@ -38,6 +48,32 @@ public class PlayerController : MonoBehaviour
         UpdatePlayerGroundedState();
         CheckHorizontalInput();
         CheckJumpInput();
+    }
+
+    private void FindCheckpoint()
+    {
+        GameObject checkpointInfoGameObject = GameObject.FindGameObjectWithTag("CheckpointInfo");
+
+        if (checkpointInfoGameObject == null)
+        {
+            return;
+        }
+
+        CheckpointInfo checkpointInfo = checkpointInfoGameObject.GetComponent<CheckpointInfo>();
+
+        if (checkpointInfo.CheckpointName == string.Empty)
+        {
+            return;
+        }
+
+        GameObject foundCheckpointFlag = GameObject.Find(checkpointInfo.CheckpointName);
+
+        if (foundCheckpointFlag == null)
+        {
+            return;
+        }
+
+        transform.position = foundCheckpointFlag.transform.position + Vector3.up * 2.0f;
     }
 
     private void UpdatePlayerGroundedState()
@@ -105,6 +141,11 @@ public class PlayerController : MonoBehaviour
                 transform.SetParent(null);
                 _rigidbody2d.velocity = new Vector2(_rigidbody2d.velocity.x, 0.0f);
                 _rigidbody2d.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
+
+                if (JumpSound != null)
+                {
+                    _audioSource.PlayOneShot(JumpSound);
+                }
             }
         }
         else if (Input.GetAxis("Jump") == 0.0f)
