@@ -84,12 +84,14 @@ public class ForcedTitleTextController : MonoBehaviour
             TitleText = titleText;
         }
 
+        _currentLetter = 0;
         _currentTimeBetweenLetters = 0.0f;
         _readingState = 1;
     }
 
     public void ClearDialogue()
     {
+        _currentLetter = 0;
         _readingState = 0;
         _titleTextTextMeshPro.text = string.Empty;
     }
